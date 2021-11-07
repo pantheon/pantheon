@@ -1,0 +1,4268 @@
+{
+    "components": {
+        "schemas": {
+            "AttributeResponse": {
+                "properties": {
+                    "attribute": {
+                        "type": "string"
+                    },
+                    "dimension": {
+                        "type": "string"
+                    },
+                    "hierarchy": {
+                        "type": "string"
+                    },
+                    "level": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "ref": {
+                        "type": "string"
+                    },
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ref",
+                    "dimension",
+                    "hierarchy",
+                    "level",
+                    "attribute",
+                    "metadata"
+                ]
+            },
+            "BackendConfigListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/BackendConfigReq"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "BackendConfigReq": {
+                "properties": {
+                    "backendType": {
+                        "type": "string"
+                    },
+                    "catalogId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "params": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "backendType",
+                    "params"
+                ]
+            },
+            "Boolean": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Boolean"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "CatalogListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/CatalogReq"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "CatalogReq": {
+                "properties": {
+                    "backendConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CompatibilityQueryRequest": {
+                "properties": {
+                    "constraints": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "customReference": {
+                        "type": "string"
+                    },
+                    "query": {
+                        "$ref": "#/components/schemas/PantheonQueryReq"
+                    },
+                    "queryId": {
+                        "format": "uuid",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "CompatibilityResponse": {
+                "properties": {
+                    "dimensions": {
+                        "items": {
+                            "$ref": "#/components/schemas/AttributeResponse"
+                        },
+                        "type": "array"
+                    },
+                    "measures": {
+                        "items": {
+                            "$ref": "#/components/schemas/MeasureResponse"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "measures",
+                    "dimensions"
+                ]
+            },
+            "ConnectionTestResult": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "valid": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "valid"
+                ]
+            },
+            "DataSourceListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/DataSourceReq"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "DataSourceProductListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/DataSourceProductReq"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "DataSourceProductProperty": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "type"
+                ]
+            },
+            "DataSourceProductReq": {
+                "properties": {
+                    "className": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "isBundled": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "productRoot": {
+                        "type": "string"
+                    },
+                    "properties": {
+                        "items": {
+                            "$ref": "#/components/schemas/DataSourceProductProperty"
+                        },
+                        "type": "array"
+                    },
+                    "type": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "isBundled",
+                    "productRoot",
+                    "name",
+                    "type",
+                    "properties"
+                ]
+            },
+            "DataSourceReq": {
+                "properties": {
+                    "catalogId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "dataSourceProductId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "properties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "name",
+                    "properties",
+                    "dataSourceProductId"
+                ]
+            },
+            "Date": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Date"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Decimal": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Decimal"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "Double": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Double"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
+            "Integer": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Integer"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "Literal": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/TypedLiteral"
+                    },
+                    {
+                        "$ref": "#/components/schemas/UnTypedLiteral"
+                    }
+                ]
+            },
+            "Long": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Long"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "MeasureMetadata": {
+                "properties": {
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "ref": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ref",
+                    "metadata"
+                ]
+            },
+            "MeasureResponse": {
+                "properties": {
+                    "aggregate": {
+                        "enum": [
+                            "Sum",
+                            "Avg",
+                            "Count",
+                            "DistinctCount",
+                            "ApproxDistinctCount",
+                            "Max",
+                            "Min"
+                        ]
+                    },
+                    "measure": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "ref": {
+                        "type": "string"
+                    },
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ref",
+                    "measure",
+                    "metadata"
+                ]
+            },
+            "NativeQueryRequest": {
+                "properties": {
+                    "customReference": {
+                        "type": "string"
+                    },
+                    "query": {
+                        "type": "string"
+                    },
+                    "queryId": {
+                        "format": "uuid",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            },
+            "NestedAttributeResponse": {
+                "properties": {
+                    "attribute": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "ref": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "attribute",
+                    "metadata",
+                    "ref"
+                ]
+            },
+            "NestedCompatibilityResponse": {
+                "properties": {
+                    "dimensions": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedSchemaScopedAttributesResponse"
+                        },
+                        "type": "array"
+                    },
+                    "measures": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedSchemaScopedMeasuresResponse"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "measures",
+                    "dimensions"
+                ]
+            },
+            "NestedDimensionResponse": {
+                "properties": {
+                    "children": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedHierarchyResponse"
+                        },
+                        "type": "array"
+                    },
+                    "dimension": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "dimension",
+                    "children"
+                ]
+            },
+            "NestedHierarchyResponse": {
+                "properties": {
+                    "children": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedLevelResponse"
+                        },
+                        "type": "array"
+                    },
+                    "hierarchy": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "hierarchy",
+                    "children"
+                ]
+            },
+            "NestedLevelResponse": {
+                "properties": {
+                    "children": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedAttributeResponse"
+                        },
+                        "type": "array"
+                    },
+                    "level": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "level",
+                    "children"
+                ]
+            },
+            "NestedMeasureResponse": {
+                "properties": {
+                    "aggregate": {
+                        "enum": [
+                            "Sum",
+                            "Avg",
+                            "Count",
+                            "DistinctCount",
+                            "ApproxDistinctCount",
+                            "Max",
+                            "Min"
+                        ]
+                    },
+                    "measure": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "ref": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ref",
+                    "measure",
+                    "metadata"
+                ]
+            },
+            "NestedSchemaScopedAttributesResponse": {
+                "properties": {
+                    "children": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedDimensionResponse"
+                        },
+                        "type": "array"
+                    },
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "children"
+                ]
+            },
+            "NestedSchemaScopedMeasuresResponse": {
+                "properties": {
+                    "children": {
+                        "items": {
+                            "$ref": "#/components/schemas/NestedMeasureResponse"
+                        },
+                        "type": "array"
+                    },
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "children"
+                ]
+            },
+            "Null": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            null
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderedColumn": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "order": {
+                        "enum": [
+                            "Asc",
+                            "Desc"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "order"
+                ]
+            },
+            "Page": {
+                "properties": {
+                    "current": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "itemCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "itemsPerPage": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "current",
+                    "itemsPerPage",
+                    "itemCount"
+                ]
+            },
+            "PantheonQueryReq": {
+                "properties": {
+                    "aggregateFilter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "columnsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "limit": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "measures": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "offset": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "orderBy": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrderedColumn"
+                        },
+                        "type": "array"
+                    },
+                    "rows": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "rowsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "type": {
+                        "enum": [
+                            "Aggregate",
+                            "Record",
+                            "Sql",
+                            "Native"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "PermissionTO": {
+                "properties": {
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "principalId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "principalId",
+                    "role"
+                ]
+            },
+            "Predicate": {
+                "properties": {}
+            },
+            "QueryHistoryListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/QueryHistoryRecord"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "QueryHistoryRecord": {
+                "properties": {}
+            },
+            "QueryParams": {
+                "properties": {
+                    "_customReference": {
+                        "type": "string"
+                    },
+                    "_page": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "_pageSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "_queryId": {
+                        "format": "uuid",
+                        "type": "string"
+                    }
+                }
+            },
+            "QueryReq": {
+                "properties": {
+                    "aggregateFilter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "columnsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "limit": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "measures": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "offset": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "orderBy": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrderedColumn"
+                        },
+                        "type": "array"
+                    },
+                    "rows": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "rowsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "sql": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "Aggregate",
+                            "Record",
+                            "Sql",
+                            "Native"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "QueryReqWithRefs": {
+                "properties": {
+                    "aggregateFilter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "columnsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "customReference": {
+                        "type": "string"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/Predicate"
+                    },
+                    "limit": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "measures": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "offset": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "orderBy": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrderedColumn"
+                        },
+                        "type": "array"
+                    },
+                    "queryId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "rows": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "rowsTopN": {
+                        "$ref": "#/components/schemas/TopN"
+                    },
+                    "sql": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "Aggregate",
+                            "Record",
+                            "Sql",
+                            "Native"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "type"
+                ]
+            },
+            "Ref": {
+                "properties": {
+                    "ref": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ref"
+                ]
+            },
+            "Response": {
+                "properties": {
+                    "columns": {
+                        "items": {
+                            "$ref": "#/components/schemas/ResponseMetaData"
+                        },
+                        "type": "array"
+                    },
+                    "measureHeaders": {
+                        "items": {
+                            "$ref": "#/components/schemas/Ref"
+                        },
+                        "type": "array"
+                    },
+                    "measures": {
+                        "items": {
+                            "$ref": "#/components/schemas/MeasureMetadata"
+                        },
+                        "type": "array"
+                    },
+                    "rows": {
+                        "items": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "columns",
+                    "rows",
+                    "measureHeaders",
+                    "measures"
+                ]
+            },
+            "ResponseMetaData": {
+                "properties": {}
+            },
+            "SavedQuery": {
+                "properties": {
+                    "catalogId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "query": {
+                        "$ref": "#/components/schemas/QueryReq"
+                    },
+                    "schemaId": {
+                        "format": "uuid",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "catalogId",
+                    "schemaId",
+                    "query"
+                ]
+            },
+            "SavedQueryListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/SavedQueryResponse"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "SavedQueryResponse": {
+                "properties": {
+                    "savedQuery": {
+                        "$ref": "#/components/schemas/SavedQuery"
+                    }
+                },
+                "required": [
+                    "savedQuery"
+                ]
+            },
+            "SchemaListResponse": {
+                "properties": {
+                    "data": {
+                        "items": {
+                            "$ref": "#/components/schemas/SchemaReq"
+                        },
+                        "type": "array"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Page"
+                    }
+                },
+                "required": [
+                    "page",
+                    "data"
+                ]
+            },
+            "SchemaReq": {
+                "properties": {
+                    "backendConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "catalogId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "psl": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "psl"
+                ]
+            },
+            "String": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "String"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TableResponse": {
+                "properties": {
+                    "columns": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "columns"
+                ]
+            },
+            "Timestamp": {
+                "properties": {
+                    "type": {
+                        "enum": [
+                            "Timestamp"
+                        ],
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TopN": {
+                "properties": {
+                    "dimensions": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "n": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "orderBy": {
+                        "items": {
+                            "$ref": "#/components/schemas/OrderedColumn"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "orderBy",
+                    "dimensions",
+                    "n"
+                ]
+            },
+            "TypedLiteral": {
+                "discriminator": {
+                    "propertyName": "type"
+                },
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Date"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Timestamp"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Boolean"
+                    },
+                    {
+                        "$ref": "#/components/schemas/String"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Integer"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Long"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Double"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Decimal"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Null"
+                    }
+                ]
+            },
+            "UnTypedLiteral": {
+                "nullable": true,
+                "oneOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "boolean"
+                    },
+                    {
+                        "type": "number"
+                    }
+                ]
+            }
+        }
+    },
+    "info": {
+        "description": "Pantheon REST API",
+        "title": "Pantheon API",
+        "version": "0.11.0"
+    },
+    "openapi": "3.0.0",
+    "paths": {
+        "/catalogs": {
+            "get": {
+                "operationId": "listCatalogs",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List catalogs",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "post": {
+                "operationId": "createCatalogs",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CatalogReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create catalog",
+                "tags": [
+                    "Catalogs"
+                ]
+            }
+        },
+        "/catalogs/{catId}/backendConfigs": {
+            "get": {
+                "operationId": "listBackendConfigs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackendConfigListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List backend configs",
+                "tags": [
+                    "Backend Configs"
+                ]
+            },
+            "post": {
+                "operationId": "createBackendConfigs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BackendConfigReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackendConfigReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create new backend config",
+                "tags": [
+                    "Backend Configs"
+                ]
+            }
+        },
+        "/catalogs/{catId}/backendConfigs/{id}": {
+            "delete": {
+                "operationId": "deleteBackendConfigs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete backend config",
+                "tags": [
+                    "Backend Configs"
+                ]
+            },
+            "get": {
+                "operationId": "findBackendConfigs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackendConfigReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get backend config",
+                "tags": [
+                    "Backend Configs"
+                ]
+            },
+            "put": {
+                "operationId": "updateBackendConfigs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BackendConfigReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BackendConfigReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update backend config",
+                "tags": [
+                    "Backend Configs"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources": {
+            "get": {
+                "operationId": "listDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List data dources",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "post": {
+                "operationId": "createDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DataSourceReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create data source",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources/{dsId}": {
+            "delete": {
+                "operationId": "deleteDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "dsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete data source",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "get": {
+                "operationId": "findDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "dsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get data source",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "put": {
+                "operationId": "updateDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "dsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DataSourceReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update data source",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources/{dsId}/tables": {
+            "get": {
+                "operationId": "getTablesFromDataSourceTables",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "dsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/TableResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List data source tables",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources/{dsId}/testConnection": {
+            "get": {
+                "operationId": "testConnectionDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "dsId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConnectionTestResult"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Test data source connection",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources/{resId}/permissions": {
+            "get": {
+                "operationId": "listPermissionsDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PermissionTO"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List data source permissions",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "post": {
+                "operationId": "createPermissionDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create data source permission",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/dataSources/{resId}/permissions/{id}": {
+            "delete": {
+                "operationId": "deletePermissionDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete data source permission",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "get": {
+                "operationId": "findPermissionDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get data source permission",
+                "tags": [
+                    "Data Sources"
+                ]
+            },
+            "put": {
+                "operationId": "updatePermissionDataSources",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update data source permission",
+                "tags": [
+                    "Data Sources"
+                ]
+            }
+        },
+        "/catalogs/{catId}/savedQueries": {
+            "get": {
+                "operationId": "listSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SavedQueryListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List endpoints",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "post": {
+                "operationId": "createSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SavedQuery"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SavedQuery"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create endpoint",
+                "tags": [
+                    "Endpoints"
+                ]
+            }
+        },
+        "/catalogs/{catId}/savedQueries/{resId}/permissions": {
+            "get": {
+                "operationId": "listPermissionsSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PermissionTO"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List endpoint permissions",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "post": {
+                "operationId": "createPermissionSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create endpoint permission",
+                "tags": [
+                    "Endpoints"
+                ]
+            }
+        },
+        "/catalogs/{catId}/savedQueries/{resId}/permissions/{id}": {
+            "delete": {
+                "operationId": "deletePermissionSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete endpoint permission",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "get": {
+                "operationId": "findPermissionSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get endpoint permission",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "put": {
+                "operationId": "updatePermissionSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update endpoint permission",
+                "tags": [
+                    "Endpoints"
+                ]
+            }
+        },
+        "/catalogs/{catId}/savedQueries/{sqId}": {
+            "delete": {
+                "operationId": "deleteSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "sqId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete endpoint",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "get": {
+                "operationId": "findSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "sqId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SavedQuery"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get endpoint",
+                "tags": [
+                    "Endpoints"
+                ]
+            },
+            "put": {
+                "operationId": "updateSavedQueries",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "sqId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SavedQuery"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SavedQuery"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update endpoint",
+                "tags": [
+                    "Endpoints"
+                ]
+            }
+        },
+        "/catalogs/{catId}/savedQueries/{sqId}/execute": {
+            "post": {
+                "operationId": "executeExecute",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "sqId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/QueryParams"
+                                    },
+                                    {
+                                        "additionalProperties": {
+                                            "$ref": "#/components/schemas/Literal"
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Execute endpoint",
+                "tags": [
+                    "Endpoints"
+                ]
+            }
+        },
+        "/catalogs/{catId}/schemas": {
+            "get": {
+                "operationId": "listSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchemaListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List schemas",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "post": {
+                "operationId": "createSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SchemaReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchemaReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create schema",
+                "tags": [
+                    "Schemas"
+                ]
+            }
+        },
+        "/catalogs/{catId}/schemas/{resId}/permissions": {
+            "get": {
+                "operationId": "listPermissionsSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PermissionTO"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List schema permissions",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "post": {
+                "operationId": "createPermissionSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create schema permission",
+                "tags": [
+                    "Schemas"
+                ]
+            }
+        },
+        "/catalogs/{catId}/schemas/{resId}/permissions/{id}": {
+            "delete": {
+                "operationId": "deletePermissionSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete schema permission",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "get": {
+                "operationId": "findPermissionSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get schema permission",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "put": {
+                "operationId": "updatePermissionSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update schema permission",
+                "tags": [
+                    "Schemas"
+                ]
+            }
+        },
+        "/catalogs/{catId}/schemas/{schemaId}": {
+            "delete": {
+                "operationId": "deleteSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete schema",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "get": {
+                "operationId": "findSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchemaReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get schema",
+                "tags": [
+                    "Schemas"
+                ]
+            },
+            "put": {
+                "operationId": "updateSchemas",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SchemaReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SchemaReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update schema",
+                "tags": [
+                    "Schemas"
+                ]
+            }
+        },
+        "/catalogs/{catId}/schemas/{schemaId}/tables": {
+            "get": {
+                "operationId": "getTablesFromSchemaTables",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/TableResponse"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List schema tables",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/dataSources/{id}/nativeQuery": {
+            "post": {
+                "operationId": "nativeQueryNativeQuery",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NativeQueryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Execute native query",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/queryHistory": {
+            "get": {
+                "operationId": "listQueryHistory",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "customRefPattern",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QueryHistoryListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List query history",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/queryHistory/{queryId}": {
+            "delete": {
+                "operationId": "cancelQueryHistory",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "queryId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Stop running query",
+                "tags": [
+                    "Queries"
+                ]
+            },
+            "get": {
+                "operationId": "getQueryHistory",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "queryId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QueryHistoryRecord"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get query history entry",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/schemas/{schemaId}/compatibility": {
+            "post": {
+                "operationId": "compatibilityCompatibility",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CompatibilityQueryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CompatibilityResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get query compatibility in plain format",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/schemas/{schemaId}/nestedCompatibility": {
+            "post": {
+                "operationId": "nestedCompatibilityNestedCompatibility",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CompatibilityQueryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NestedCompatibilityResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get query compatibility in nested format",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/schemas/{schemaId}/query": {
+            "post": {
+                "operationId": "executeQuery",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/QueryReqWithRefs"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Response"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Run query on schema",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{catalogId}/schemas/{schemaId}/verify": {
+            "get": {
+                "operationId": "verifyVerify",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "catalogId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "schemaId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Verify schema",
+                "tags": [
+                    "Queries"
+                ]
+            }
+        },
+        "/catalogs/{id}": {
+            "delete": {
+                "operationId": "deleteCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete catalog",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "get": {
+                "operationId": "findCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get catalog",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "put": {
+                "operationId": "updateCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CatalogReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CatalogReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update catalog",
+                "tags": [
+                    "Catalogs"
+                ]
+            }
+        },
+        "/catalogs/{resId}/permissions": {
+            "get": {
+                "operationId": "listPermissionsCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PermissionTO"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List catalog permissions",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "post": {
+                "operationId": "createPermissionCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create catalog permission",
+                "tags": [
+                    "Catalogs"
+                ]
+            }
+        },
+        "/catalogs/{resId}/permissions/{id}": {
+            "delete": {
+                "operationId": "deletePermissionCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete catalog permission",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "get": {
+                "operationId": "findPermissionCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get catalog permission",
+                "tags": [
+                    "Catalogs"
+                ]
+            },
+            "put": {
+                "operationId": "updatePermissionCatalogs",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update catalog permission",
+                "tags": [
+                    "Catalogs"
+                ]
+            }
+        },
+        "/dataSourceProducts": {
+            "get": {
+                "operationId": "listDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "required": false,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceProductListResponse"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List data source products",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "post": {
+                "operationId": "createDataSourceProducts",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DataSourceProductReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceProductReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create data source product",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{id}": {
+            "delete": {
+                "operationId": "deleteDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete data source product",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "get": {
+                "operationId": "findDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceProductReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get data source product",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "put": {
+                "operationId": "updateDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DataSourceProductReq"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataSourceProductReq"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update data source product",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{id}/lib": {
+            "get": {
+                "operationId": "listLib",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List Data Source product files",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{id}/lib/{name}": {
+            "delete": {
+                "operationId": "deleteLib",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete data source product file",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "put": {
+                "operationId": "putLib",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "format": "binary",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Upload data source product file",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{id}/png": {
+            "get": {
+                "operationId": "getIconDataSourceProductsPng",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "image/png": {
+                                "schema": {
+                                    "format": "binary",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get data source product icon",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "put": {
+                "operationId": "putIconDataSourceProductsPng",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "image/png": {
+                            "schema": {
+                                "format": "binary",
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Upload data source product icon",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{id}/testConnection": {
+            "post": {
+                "operationId": "testConnectionDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConnectionTestResult"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Test connection for data source product",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{resId}/permissions": {
+            "get": {
+                "operationId": "listPermissionsDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/PermissionTO"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "List data source product permissions",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "post": {
+                "operationId": "createPermissionDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Create data source product permission",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        },
+        "/dataSourceProducts/{resId}/permissions/{id}": {
+            "delete": {
+                "operationId": "deletePermissionDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "summary": "Delete data source product permission",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "get": {
+                "operationId": "findPermissionDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Get data source product permissions",
+                "tags": [
+                    "Data Source Products"
+                ]
+            },
+            "put": {
+                "operationId": "updatePermissionDataSourceProducts",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "resId",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PermissionTO"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PermissionTO"
+                                }
+                            }
+                        },
+                        "description": "success"
+                    }
+                },
+                "summary": "Update data source product permission",
+                "tags": [
+                    "Data Source Products"
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "routes"
+        }
+    ]
+}

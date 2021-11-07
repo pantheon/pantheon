@@ -1,0 +1,21 @@
+.cache
+node_modules
+*.log
+.DS_Store
+dist
+build
+public/monaco-editor
+lib
+yarn.lock
+.idea
+*.iml
+.antlr
+
+
+# Helm chart packages:
+chart/**/*.tgz
+
+# Files managed by operational-scripts
+tslint.json
+tsconfig.json
+.prettierrc

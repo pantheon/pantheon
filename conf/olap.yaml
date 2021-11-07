@@ -1,0 +1,138 @@
+calculations: 
+  - key: pageviews_per_click
+    aggregation: sum
+    expression: ${fact2.pageviews} / ${fact1.revenue_for_click}
+
+# Compatibility for object dimensions is calculated on the intersection
+# of object dimension-primitive dimensions.
+# Cubes would be created for each of the distinct intersection combinations.
+#
+# For example:
+# if fact1.article has title, name, updated_at
+# if fact2.article has title, name, length
+#
+# Then querying for fact1&2 measures with the article dimension will
+# return dimensions: title, name
+# Querying for only a fact1 measure with the article dimension will
+# return dimensions: title, name, updated_at
+# Querying for only a fact2 measure with the article dimension will
+# return dimensions: title, name, length
+shared_dimensions:
+  - key: browser_agent
+    dimensions:
+      - ${fact1.browser}
+      - ${fact2.browser}
+  - key: article
+    dimensions:
+      - ${fact1.article}
+      - ${fact2.article}
+  - key: date
+    dimensions:
+      - ${fact1.date}
+      - ${fact2.date} # first one mentioned is the default?
+      - ${fact2.processing_date}
+      - ${fact2.published_date}
+  - key: author_name
+    dimensions:
+      - ${fact1.article.author_name}
+      - ${fact1.author_name}
+
+tables:
+  - key: fact1
+    storage_key: fact_table1
+    measures: 
+      - key: revenue_for_click
+        name: Revenue for click
+        data_type: decimal
+        aggregation: sum
+        expression: ${COLUMNS.cpc}
+      - key: contribution
+        name: Contribution
+        data_type: decimal
+        aggregation: sum
+        expression: ${revenue_for_click} * 0.30
+    dimensions:
+      # Degenerate dimension
+      - key: browser
+        data_type: string
+        expression: ${browser}
+      # Article entity      
+      - key: article
+        data_type: object
+        join: 
+          target_table: articles
+          target_expression: ${COLUMNS.id}
+          source_expression: ${COLUMNS.article_id}     
+      - key: portal
+        data_type: object
+        dimensions: 
+          - key: name
+            data_type: string
+            expression: ${COLUMNS.portal}
+          - key: title
+            data_type: string
+            expression: CAPITALIZE(${COLUMNS.portal})
+      # Date entity           
+      - key: date
+        data_type: date
+        join: 
+          target_table: dates
+          target_expression: ${COLUMNS.id}
+          source_expression: ${COLUMNS.date_key}
+      # Date entity (from a degenerate dimension)
+      - key: processing_date
+        data_type: date
+        expression: ${COLUMNS.processing_date}
+        date_intervals: [year, month]
+
+  - key: fact2
+    storage_key: fact_table2
+    measures: 
+      - key: pageviews
+        name: Pageviews
+        data_type: decimal
+        aggregation: count
+        expression: ${COLUMNS.date_key}
+    dimensions:
+      # Degenerate dimension
+      - key: browser
+        data_type: string
+        expression: ${COLUMNS.browser}
+      # Degenerate dimension
+      - key: author_name
+        data_type: string
+        expression: ${COLUMNS.author_name}        
+      # Date entity
+      - key: date
+        data_type: date
+        join: 
+          target_table: dates
+          target_expression: ${COLUMNS.id}
+          source_expression: ${COLUMNS.date_key}
+      # INT year dimension
+      - key: published_date
+        data_type: date
+        dimensions: 
+          - key: year
+            data_type: date_year
+            expression: ${COLUMNS.published_year}              
+
+  - key: articles
+    storage_key: articles
+    dimensions:
+      - key: title
+        data_type: string
+        expression: ${COLUMNS.title}
+      - key: author_name
+        data_type: string
+        expression: ${COLUMNS.author_name}
+
+  - key: dates
+    storage_key: dates
+    dimensions:
+      - key: year
+        data_type: date_year
+        expression: ${COLUMNS.year}
+      - key: month
+        data_type: date_month
+        expression: ${COLUMNS.month}

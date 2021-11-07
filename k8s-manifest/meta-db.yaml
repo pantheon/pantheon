@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:  
+  labels:
+    run: pantheon-db-BRANCH_PLACEHOLDER
+  name: pantheon-db-BRANCH_PLACEHOLDER    
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: pantheon-db-BRANCH_PLACEHOLDER
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: pantheon-db-BRANCH_PLACEHOLDER
+    spec:
+      containers:
+      - image: eu.gcr.io/dev-and-test-env/pantheon-meta-db:v1.0.0
+        imagePullPolicy: IfNotPresent
+        name: pantheon-db-BRANCH_PLACEHOLDER
+        readinessProbe:
+          exec:
+            command: ["psql", "-h", "localhost", "-U", "root", "-d", "pantheon_test", "-c", "SELECT 1"]
+          initialDelaySeconds: 10
+          timeoutSeconds: 5          
+          periodSeconds: 15
+          failureThreshold: 20
+          successThreshold: 1

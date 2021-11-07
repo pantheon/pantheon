@@ -1,0 +1,45 @@
+---
+- type: 'UUID'
+  specAsParameter:
+  - type: string
+    format: uuid
+- type: 'Some\[UUID\]'
+  specAsParameter:
+  - type: string
+    format: uuid
+- type: 'java\.util\.UUID'
+  specAsParameter:
+  - type: string
+    format: uuid
+  specAsProperty:
+    type: string
+    format: uuid
+- type: 'collection\.immutable\.map\[string,string\]'
+  specAsParameter: []
+  specAsProperty:
+    type: object
+    additionalProperties:
+      type: string
+- type: 'collection\.immutable\.map'
+  specAsParameter: []
+  specAsProperty:
+    type: object
+    additionalProperties:
+      type: string
+- type: 'play\.api\.libs\.json\.jsarray'
+  specAsParameter: []
+  specAsProperty:
+    type: array
+    items:
+      type: string
+- type: pantheon\.schema\.MeasureAggregate
+  specAsParameter: []
+  specAsProperty:
+    enum:
+      - Sum
+      - Avg
+      - Count
+      - DistinctCount
+      - ApproxDistinctCount
+      - Max
+      - Min

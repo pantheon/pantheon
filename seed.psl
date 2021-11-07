@@ -1,0 +1,101 @@
+schema SCHEMA_NAME(dataSource = "foodmart") {
+  dimension Date (table = "time_by_day") {
+    attribute Year (column = "the_year")
+    attribute Quarter (column = "quarter")
+    attribute Month (column = "month_of_year")
+    attribute Week (column = "week_of_year")
+    attribute Day (column = "day_of_month")
+    attribute Date (column = "the_date")
+  }
+
+  dimension Product(table = "product") {
+    attribute brand(column = "brand_name")
+    attribute name(column = "product_name")
+    attribute weight(column = "weight_bucket")
+    attribute recyclable_packaging(column = "recyclable_package")
+  }
+
+  dimension Store(table = "store") {
+    level region(column = "region_id", table = "region") {
+      attribute city(column = "sales_city")
+      attribute province(column = "sales_state_province")
+      attribute region(column = "sales_region")
+      attribute country(column = "sales_country")
+    }
+    level store(column = "store_id") {
+      attribute name(column = "store_name")
+      attribute type(column = "store_type")
+    }
+  }
+
+  dimension Customer(table = "customer") {
+    level country
+    level province(column = "state_province")
+    level city
+    level customer(column = "customer_id") {
+      attribute firstName(column = "fname")
+      attribute lastName(column = "lname")
+      attribute birthDate(column = "birthdate")
+      attribute birthYear
+      attribute gender
+    }
+  }
+
+  dimension Warehouse(table = "warehouse") {
+    attribute name(column = "warehouse_name")
+    attribute city(column = "warehouse_city")
+    attribute country(column = "warehouse_country")
+  }
+  dimension WarehouseClass(table = "warehouse_class") {
+    attribute description(column = "description")
+  }
+
+  measure unitsOrdered(column = "inventory.units_ordered")
+  measure unitsShipped(column = "inventory.units_shipped")
+  measure warehouseSales(column = "inventory.warehouse_sales")
+  measure warehouseCost(column = "inventory.warehouse_cost")
+
+  measure sales(column = "sales_fact.store_sales")
+  measure cost(column = "sales_fact.store_cost")
+  measure unitSales(column = "sales_fact.unit_sales")
+
+  table customer {
+    column birthYear(expression = "extract(year from birthdate)")
+  }
+
+  table store {
+    column region_id (tableRef = "region.region_id")
+  }
+
+  table inventory(sql = """select * from "foodmart"."inventory_fact_1997" union all
+                            select * from "foodmart"."inventory_fact_1998"
+			 """) {
+    column time_id (tableRef = "time_by_day.time_id")
+    column store_id (tableRef = "store.store_id")
+    column product_id (tableRef = "product.product_id")
+    column warehouse_id (tableRef = "warehouse.warehouse_id")
+
+    column units_ordered
+    column units_shipped
+    column warehouse_sales
+    column warehouse_cost
+  }
+
+  table sales_fact(sql = """select * from "foodmart"."sales_fact_1997" union all
+                            select * from "foodmart"."sales_fact_1998" union all
+                            select * from "foodmart"."sales_fact_dec_1998"
+			 """) {
+    column time_id (tableRef = "time_by_day.time_id")
+    column customer_id (tableRef = "customer.customer_id")
+    column store_id (tableRef = "store.store_id")
+    column product_id (tableRef = "product.product_id")
+
+    column store_sales
+    column store_cost
+    column unit_sales
+  }
+
+  table warehouse {
+    column warehouse_class_id(tableRef = "warehouse_class.warehouse_class_id")
+  }
+}

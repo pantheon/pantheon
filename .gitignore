@@ -1,0 +1,13 @@
+logs
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+.DS_Store
+*~
+/project/project
+/RUNNING_PID
+/chart/pantheon/charts/*.tgz
+.tags

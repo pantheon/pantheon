@@ -1,0 +1,14 @@
+startDelaySeconds: 0
+# JMX host/port
+hostPort: 0.0.0.0:5000
+username:
+password:
+ssl: false
+lowercaseOutputName: false
+lowercaseOutputLabelNames: false
+whitelistObjectNames: ["com.zaxxer.hikari:type=Pool *,*", "slick:type=*,*"]
+rules:
+  - pattern: "com.zaxxer.hikari"
+    type: GAUGE
+  - pattern: "slick"
+    type: GAUGE

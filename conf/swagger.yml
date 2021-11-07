@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: "Pantheon API"
+  description: "Pantheon REST API"
+  version: "0.11.0"
+components:
+  schemas:
+    Timestamp:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: [Timestamp]
+          value:
+            #use pattern to define Timestamp format
+            type: string
+
+    Date:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Date]
+        value:
+          #use pattern to define Date format (check if default 'date' format fits here)
+          type: string
+
+    Boolean:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Boolean]
+        value:
+          type: boolean
+
+    String:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [String]
+        value:
+          type: string
+
+    Integer:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Integer]
+        value:
+          type: integer
+          format: int32
+
+    Long:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Long]
+        value:
+          type: integer
+          format: int64
+
+    Double:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Double]
+        value:
+          type: number
+          format: double
+
+    Decimal:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Decimal]
+        value:
+          type: number
+
+    'Null':
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Null]
+
+    TypedLiteral:
+      oneOf:
+        - $ref: '#/components/schemas/Date'
+        - $ref: '#/components/schemas/Timestamp'
+        - $ref: '#/components/schemas/Boolean'
+        - $ref: '#/components/schemas/String'
+        - $ref: '#/components/schemas/Integer'
+        - $ref: '#/components/schemas/Long'
+        - $ref: '#/components/schemas/Double'
+        - $ref: '#/components/schemas/Decimal'
+        - $ref: '#/components/schemas/Null'
+      discriminator:
+        propertyName: 'type'
+
+    UnTypedLiteral:
+      oneOf:
+        - type: string
+        - type: boolean
+        - type: number
+      nullable: true
+
+    Literal:
+      oneOf:
+        - $ref: "#/components/schemas/TypedLiteral"
+        - $ref: "#/components/schemas/UnTypedLiteral"

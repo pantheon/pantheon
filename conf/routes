@@ -1,0 +1,1194 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+### NoDocs ###
+GET     /  controllers.HomeController.index
+
+# Data Source Products
+
+###
+#  summary: List data source products
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductListResponse'
+###
+GET     /dataSourceProducts      controllers.DataSourceProductController.list(page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Get data source product
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductReq'
+###
+GET     /dataSourceProducts/:id  controllers.DataSourceProductController.find(id: UUID)
+
+###
+#  summary: Update data source product
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductReq'
+###
+PUT     /dataSourceProducts/:id  controllers.DataSourceProductController.update(id: UUID)
+
+###
+#  summary: Create data source product
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceProductController.DataSourceProductReq'
+###
+POST    /dataSourceProducts      controllers.DataSourceProductController.create()
+
+###
+#  summary: Delete data source product
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /dataSourceProducts/:id  controllers.DataSourceProductController.delete(id: UUID)
+
+###
+#  summary: Test connection for data source product
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          type: object
+#          additionalProperties:
+#            type: string
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.ConnectionTestResult'
+###
+POST    /dataSourceProducts/:id/testConnection  controllers.DataSourceProductController.testConnection(id: UUID)
+
+# Data Source Product Files
+
+###
+#  summary: Get data source product icon
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'image/png':
+#          schema:
+#            type: string
+#            format: binary
+###
+GET     /dataSourceProducts/:id/icon.png   controllers.DataSourceProductFileController.getIcon(id: UUID)
+
+###
+#  summary: Upload data source product icon
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'image/png':
+#        schema:
+#          type: string
+#          format: binary
+#  responses:
+#    200:
+#      description: success
+###
+PUT     /dataSourceProducts/:id/icon.png   controllers.DataSourceProductFileController.putIcon(id: UUID)
+
+###
+#  summary: List Data Source product files
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              type: string
+###
+GET     /dataSourceProducts/:id/lib        controllers.DataSourceProductFileController.list(id: UUID)
+
+###
+#  summary: Upload data source product file
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/octet-stream':
+#        schema:
+#          type: string
+#          format: binary
+#  responses:
+#    200:
+#      description: success
+###
+PUT     /dataSourceProducts/:id/lib/:name  controllers.DataSourceProductFileController.put(id: UUID, name: String)
+
+###
+#  summary: Delete data source product file
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /dataSourceProducts/:id/lib/:name  controllers.DataSourceProductFileController.delete(id: UUID, name: String)
+
+# Data Source Product Permissions
+
+###
+#  summary: List data source product permissions
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /dataSourceProducts/:resId/permissions      controllers.DataSourceProductController.listPermissions(resId: UUID)
+
+###
+#  summary: Get data source product permissions
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /dataSourceProducts/:resId/permissions/:id  controllers.DataSourceProductController.findPermission(resId: UUID, id: UUID)
+
+###
+#  summary: Create data source product permission
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+POST    /dataSourceProducts/:resId/permissions      controllers.DataSourceProductController.createPermission(resId: UUID)
+
+###
+#  summary: Update data source product permission
+#  tags:
+#    - Data Source Products
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+PUT     /dataSourceProducts/:resId/permissions/:id  controllers.DataSourceProductController.updatePermission(resId: UUID, id: UUID)
+
+###
+#  summary: Delete data source product permission
+#  tags:
+#    - Data Source Products
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /dataSourceProducts/:resId/permissions/:id  controllers.DataSourceProductController.deletePermission(resId: UUID, id: UUID)
+
+# Catalogs
+
+###
+#  summary: List catalogs
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.CatalogController.CatalogListResponse'
+###
+GET     /catalogs      controllers.CatalogController.list(page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Get catalog
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.CatalogController.CatalogReq'
+###
+GET     /catalogs/:id  controllers.CatalogController.find(id: UUID)
+
+###
+#  summary: Update catalog
+#  tags:
+#    - Catalogs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.CatalogController.CatalogReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.CatalogController.CatalogReq'
+###
+PUT     /catalogs/:id  controllers.CatalogController.update(id: UUID)
+
+###
+#  summary: Create catalog
+#  tags:
+#    - Catalogs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.CatalogController.CatalogReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.CatalogController.CatalogReq'
+###
+POST    /catalogs      controllers.CatalogController.create()
+
+###
+#  summary: Delete catalog
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:id  controllers.CatalogController.delete(id: UUID)
+
+# Catalog Permissions
+
+###
+#  summary: List catalog permissions
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:resId/permissions        controllers.CatalogController.listPermissions(resId: UUID)
+
+###
+#  summary: Get catalog permission
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:resId/permissions/:id    controllers.CatalogController.findPermission(resId: UUID, id: UUID)
+
+###
+#  summary: Create catalog permission
+#  tags:
+#    - Catalogs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+POST    /catalogs/:resId/permissions        controllers.CatalogController.createPermission(resId: UUID)
+
+###
+#  summary: Update catalog permission
+#  tags:
+#    - Catalogs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+PUT    /catalogs/:resId/permissions/:id    controllers.CatalogController.updatePermission(resId: UUID, id: UUID)
+
+###
+#  summary: Delete catalog permission
+#  tags:
+#    - Catalogs
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:resId/permissions/:id    controllers.CatalogController.deletePermission(resId: UUID, id: UUID)
+
+# Backend Configs
+
+###
+#  summary: List backend configs
+#  tags:
+#    - Backend Configs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigListResponse'
+###
+GET     /catalogs/:catId/backendConfigs      controllers.BackendConfigController.list(catId: UUID, page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Create new backend config
+#  tags:
+#    - Backend Configs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigReq'
+###
+POST    /catalogs/:catId/backendConfigs      controllers.BackendConfigController.create(catId: UUID)
+
+###
+#  summary: Get backend config
+#  tags:
+#    - Backend Configs
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigReq'
+###
+GET     /catalogs/:catId/backendConfigs/:id  controllers.BackendConfigController.find(catId: UUID, id: UUID)
+
+###
+#  summary: Update backend config
+#  tags:
+#    - Backend Configs
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.BackendConfigController.BackendConfigReq'
+###
+PUT     /catalogs/:catId/backendConfigs/:id  controllers.BackendConfigController.update(catId: UUID, id: UUID)
+
+###
+#  summary: Delete backend config
+#  tags:
+#    - Backend Configs
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/backendConfigs/:id  controllers.BackendConfigController.delete(catId: UUID, id: UUID)
+
+# Schemas
+
+###
+#  summary: List schemas
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.SchemaController.SchemaListResponse'
+###
+GET     /catalogs/:catId/schemas            controllers.SchemaController.list(catId: UUID, page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Create schema
+#  tags:
+#    - Schemas
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.SchemaController.SchemaReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.SchemaController.SchemaReq'
+###
+POST    /catalogs/:catId/schemas            controllers.SchemaController.create(catId: UUID)
+
+###
+#  summary: Get schema
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.SchemaController.SchemaReq'
+###
+GET     /catalogs/:catId/schemas/:schemaId  controllers.SchemaController.find(catId: UUID, schemaId: UUID)
+
+###
+#  summary: Update schema
+#  tags:
+#    - Schemas
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.SchemaController.SchemaReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.SchemaController.SchemaReq'
+###
+PUT     /catalogs/:catId/schemas/:schemaId  controllers.SchemaController.update(catId: UUID, schemaId: UUID)
+
+###
+#  summary: Delete schema
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/schemas/:schemaId  controllers.SchemaController.delete(catId: UUID, schemaId: UUID)
+
+# Schema Permissions
+
+###
+#  summary: List schema permissions
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/schemas/:resId/permissions      controllers.SchemaController.listPermissions(resId: UUID, catId: Some[UUID])
+
+###
+#  summary: Get schema permission
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/schemas/:resId/permissions/:id  controllers.SchemaController.findPermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Create schema permission
+#  tags:
+#    - Schemas
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+POST    /catalogs/:catId/schemas/:resId/permissions      controllers.SchemaController.createPermission(resId: UUID, catId: Some[UUID])
+
+###
+#  summary: Update schema permission
+#  tags:
+#    - Schemas
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+PUT     /catalogs/:catId/schemas/:resId/permissions/:id      controllers.SchemaController.updatePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Delete schema permission
+#  tags:
+#    - Schemas
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/schemas/:resId/permissions/:id  controllers.SchemaController.deletePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+# Data Sources
+
+###
+#  summary: List data sources
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceController.DataSourceListResponse'
+###
+GET     /catalogs/:catId/dataSources        controllers.DataSourceController.list(catId: UUID, page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Create data source
+#  tags:
+#    - Data Sources
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.DataSourceController.DataSourceReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceController.DataSourceResp'
+###
+POST    /catalogs/:catId/dataSources        controllers.DataSourceController.create(catId: UUID)
+
+###
+#  summary: Get data source
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceController.DataSourceResp'
+###
+GET     /catalogs/:catId/dataSources/:dsId  controllers.DataSourceController.find(catId: UUID,dsId: UUID)
+
+###
+#  summary: Update data source
+#  tags:
+#    - Data Sources
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.DataSourceController.DataSourceReq'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.DataSourceController.DataSourceResp'
+###
+PUT     /catalogs/:catId/dataSources/:dsId  controllers.DataSourceController.update(catId: UUID,dsId: UUID)
+
+###
+#  summary: Delete data source
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/dataSources/:dsId  controllers.DataSourceController.delete(catId: UUID,dsId: UUID)
+
+###
+#  summary: Test data source connection
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.ConnectionTestResult'
+###
+GET     /catalogs/:catId/dataSources/:dsId/testConnection  controllers.DataSourceController.testConnection(catId: UUID,dsId: UUID)
+
+###
+#  summary: List data source tables
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/controllers.TablesController.TableResponse'
+###
+GET     /catalogs/:catId/dataSources/:dsId/tables  controllers.TablesController.getTablesFromDataSource(catId: UUID, dsId: UUID)
+
+# Data Source Permissions
+
+###
+#  summary: List data source permissions
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/dataSources/:resId/permissions      controllers.DataSourceController.listPermissions(resId: UUID, catId: Some[UUID])
+
+###
+#  summary: Get data source permission
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/dataSources/:resId/permissions/:id  controllers.DataSourceController.findPermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Create data source permission
+#  tags:
+#    - Data Sources
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+POST    /catalogs/:catId/dataSources/:resId/permissions      controllers.DataSourceController.createPermission(resId: UUID,  catId: Some[UUID])
+
+###
+#  summary: Update data source permission
+#  tags:
+#    - Data Sources
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+PUT    /catalogs/:catId/dataSources/:resId/permissions/:id      controllers.DataSourceController.updatePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Delete data source permission
+#  tags:
+#    - Data Sources
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/dataSources/:resId/permissions/:id  controllers.DataSourceController.deletePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+# Endpoints
+
+###
+#  summary: List endpoints
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.SavedQueryController.SavedQueryListResponse'
+###
+GET     /catalogs/:catId/savedQueries                controllers.SavedQueryController.list(catId: UUID, page: Option[Int], pageSize: Option[Int])
+
+###
+#  summary: Create endpoint
+#  tags:
+#    - Endpoints
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.SavedQuery'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.SavedQuery'
+###
+POST    /catalogs/:catId/savedQueries                controllers.SavedQueryController.create(catId: UUID)
+
+###
+#  summary: Get endpoint
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.SavedQuery'
+###
+GET     /catalogs/:catId/savedQueries/:sqId          controllers.SavedQueryController.find(catId: UUID, sqId: UUID)
+
+###
+#  summary: Update endpoint
+#  tags:
+#    - Endpoints
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.SavedQuery'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.SavedQuery'
+###
+PUT     /catalogs/:catId/savedQueries/:sqId          controllers.SavedQueryController.update(catId: UUID, sqId: UUID)
+
+###
+#  summary: Delete endpoint
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/savedQueries/:sqId          controllers.SavedQueryController.delete(catId: UUID, sqId: UUID)
+
+###
+#  summary: Execute endpoint
+#  tags:
+#    - Endpoints
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          allOf:
+#            - $ref: '#/components/schemas/controllers.SavedQueryExecController.QueryParams'
+#            - type: object
+#              additionalProperties:
+#               $ref: '#/components/schemas/Literal'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryHelper.Response'
+###
+POST    /catalogs/:catId/savedQueries/:sqId/execute  controllers.SavedQueryExecController.execute(catId: UUID, sqId: UUID)
+
+# Endpoint Permissions
+
+###
+#  summary: List endpoint permissions
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/savedQueries/:resId/permissions       controllers.SavedQueryController.listPermissions(resId: UUID, catId: Some[UUID])
+
+###
+#  summary: Get endpoint permission
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+GET     /catalogs/:catId/savedQueries/:resId/permissions/:id   controllers.SavedQueryController.findPermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Create endpoint permission
+#  tags:
+#    - Endpoints
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+POST    /catalogs/:catId/savedQueries/:resId/permissions       controllers.SavedQueryController.createPermission(resId: UUID, catId: Some[UUID])
+
+###
+#  summary: Update endpoint permission
+#  tags:
+#    - Endpoints
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.Authorization.PermissionTO'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/services.Authorization.PermissionTO'
+###
+PUT    /catalogs/:catId/savedQueries/:resId/permissions/:id     controllers.SavedQueryController.updatePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+###
+#  summary: Delete endpoint permission
+#  tags:
+#    - Endpoints
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catId/savedQueries/:resId/permissions/:id   controllers.SavedQueryController.deletePermission(resId: UUID, id: UUID, catId: Some[UUID])
+
+# Native SQL Queries
+
+###
+#  summary: Execute native query
+#  tags:
+#    - Queries
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.NativeQueriesController.NativeQueryRequest'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryHelper.Response'
+###
+POST /catalogs/:catalogId/dataSources/:id/nativeQuery controllers.NativeQueriesController.nativeQuery(catalogId: UUID, id: UUID)
+
+# Query & Compatibility
+
+###
+#  summary: Run query on schema
+#  tags:
+#    - Queries
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/services.serializers.QuerySerializers.QueryReqWithRefs'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryHelper.Response'
+###
+POST    /catalogs/:catalogId/schemas/:schemaId/query                controllers.QueryController.execute(catalogId: UUID, schemaId: UUID)
+
+###
+#  summary: Get query compatibility in plain format
+#  tags:
+#    - Queries
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.QueryController.CompatibilityQueryRequest'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryController.CompatibilityResponse'
+###
+POST    /catalogs/:catalogId/schemas/:schemaId/compatibility        controllers.QueryController.compatibility(catalogId: UUID, schemaId: UUID)
+
+###
+#  summary: Get query compatibility in nested format
+#  tags:
+#    - Queries
+#  requestBody:
+#    content:
+#      'application/json':
+#        schema:
+#          $ref: '#/components/schemas/controllers.QueryController.CompatibilityQueryRequest'
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryController.NestedCompatibilityResponse'
+###
+POST    /catalogs/:catalogId/schemas/:schemaId/nestedCompatibility  controllers.QueryController.nestedCompatibility(catalogId: UUID, schemaId: UUID)
+
+###
+#  summary: Verify schema
+#  tags:
+#    - Queries
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: object
+###
+GET     /catalogs/:catalogId/schemas/:schemaId/verify               controllers.SchemaVerificationController.verify(catalogId: UUID, schemaId: UUID)
+
+###
+#  summary: List schema tables
+#  tags:
+#    - Queries
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            type: array
+#            items:
+#              $ref: '#/components/schemas/controllers.TablesController.TableResponse'
+###
+GET /catalogs/:catId/schemas/:schemaId/tables  controllers.TablesController.getTablesFromSchema(catId: UUID, schemaId: UUID)
+
+# Query History
+
+###
+#  summary: List query history
+#  tags:
+#    - Queries
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryHistoryController.QueryHistoryListResponse'
+###
+GET     /catalogs/:catalogId/queryHistory           controllers.QueryHistoryController.list(catalogId: UUID, page: Option[Int], pageSize: Option[Int], customRefPattern: Option[String])
+
+###
+#  summary: Get query history entry
+#  tags:
+#    - Queries
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.QueryHistoryController.QueryHistoryRecord'
+###
+GET     /catalogs/:catalogId/queryHistory/:queryId  controllers.QueryHistoryController.get(catalogId: UUID, queryId: UUID)
+
+###
+#  summary: Stop running query
+#  tags:
+#    - Queries
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /catalogs/:catalogId/queryHistory/:queryId  controllers.QueryHistoryController.cancel(catalogId: UUID, queryId: UUID)
+
+#Status
+
+### NoDocs ###
+#  summary: Get Pantheon status
+#  responses:
+#    200:
+#      description: success
+#      content:
+#        'application/json':
+#          schema:
+#            $ref: '#/components/schemas/controllers.StatusController.StatusResponse'
+###
+GET     /status  controllers.StatusController.getStatus
+
+# Map static resources from the /public folder to the /assets URL path
+
+### NoDocs ###
+GET     /assets/*file  controllers.Assets.versioned(path="/public", file: Asset)
+
