@@ -20,11 +20,11 @@ echo
 
 # create datasource
 DS_ID="1b67aee9-b82d-4b89-9c02-06f3d320b1f8"
-DS_LOC="jdbc:postgresql://foodmart-postgres/foodmart"
-DS_PARAMS='{"username":"postgres","password":"dev"}'
+DS_LOC="jdbc:postgresql://localhost/foodmart"
+DS_PARAMS='{"host":"localhost","database":"foodmart","user":"foodmart","password":"foodmart"}'
 
 echo "Creating datasource"
-createReq "/catalogs/${CAT_ID}/dataSources" "{\"name\":\"foodmart\",\"type\":\"jdbc\",\"locationUri\":\"${DS_LOC}\",\"params\":${DS_PARAMS}}"
+createReq "/catalogs/${CAT_ID}/dataSources" "{\"dataSourceProductId\":\"45b8a9da-3bff-4e2f-83b3-8cf9a7e6daf1\",\"name\":\"foodmart\",\"properties\":${DS_PARAMS}}"
 echo
 
 # create schema

@@ -1,14 +1,17 @@
 package pantheon.backend.calcite
 
 import java.util.function.Consumer
-
 import org.apache.calcite.plan.volcano.VolcanoPlanner
 import org.apache.calcite.rel.rules.{AggregateProjectMergeRule, JoinCommuteRule, JoinPushThroughJoinRule}
 import org.apache.calcite.runtime.Hook
 import pantheon.backend.Backend
 import pantheon.schema.Schema
 
+import java.sql.DriverManager
+
 object CalciteBackend {
+
+  DriverManager.registerDriver(new org.apache.calcite.jdbc.Driver());
 
   def apply(params: Map[String, String] = Map.empty): CalciteBackend = new CalciteBackend(params)
 

@@ -8,7 +8,6 @@ export interface RuntimeConfig {
 }
 
 const defaultConfig = {
-  sentryDSN: undefined,
   dev: process.env.NODE_ENV === "development" || Boolean(new URL(window.location.href).searchParams.get("dev")),
   useNewQueryEditor: false,
   compactSidenav: false,
@@ -58,16 +57,5 @@ if (process.env.NODE_ENV === "development") {
     setConfig("loginUrl", "http://localhost:4300/auth/login");
     setConfig("logoutUrl", "http://localhost:4300/auth/logout");
     setConfig("meUrl", "http://localhost:4300/auth/api");
-  }
-  /**
-   * Switch the backend to dev.contiamo.io if the domain is `*.contiamo.io`
-   */
-  if (window.location.host.includes("contiamo.io")) {
-    // tslint:disable-next-line:no-console
-    console.log("Connected to `*.dev.contiamo.io` backend");
-    setConfig("backend", "https://pantheon.dev.contiamo.io/contiamo/");
-    setConfig("loginUrl", "https://auth.dev.contiamo.io/login");
-    setConfig("logoutUrl", "https://auth.dev.contiamo.io/logout");
-    setConfig("meUrl", "https://auth.dev.contiamo.io/api");
   }
 }

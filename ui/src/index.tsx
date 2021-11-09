@@ -31,7 +31,8 @@ export interface CatalogResponse {
 
 // Setup Sentry
 Sentry.init({
-  dsn: getConfig("sentryDSN"),
+  enabled: false,
+  // dsn: getConfig("sentryDSN"),
   environment: process.env.NODE_ENV,
   release: process.env.VERSION,
 });

@@ -34,15 +34,12 @@ import NakedCard from "../../NakedCard";
 
 import { getConfig } from "../../Config";
 
-import { topNDecoder, topNSample } from "../../../data/topN";
-
 import {
   CompatibilityError,
   LimitContainer,
   ResultsCard,
   ResultsCardContent,
   RunButtonContainer,
-  SplitCard,
   StaleResultsWarning,
   StyledTextarea,
 } from "./Miscellaneous";
@@ -461,14 +458,6 @@ class AggregateView extends React.Component<Props, LocalState> {
                 />
               </DragDropContext>
             </CardSection>
-            <CardSection title="Top N Rows" disabled={this.isUiDisabled()} {...this.toggleProps("topNRows")}>
-              <JsonTextarea
-                value={presentQuery.rowsTopN}
-                onChange={this.props.changeAggregateRowsTopN}
-                validate={topNDecoder}
-                placeholder={JSON.stringify(topNSample, null, 2)}
-              />
-            </CardSection>
             <CardSection title="Filter" disabled={this.isUiDisabled()} {...this.toggleProps("filter")}>
               <StyledTextarea
                 value={presentQuery.filter || ""}
@@ -517,8 +506,7 @@ class AggregateView extends React.Component<Props, LocalState> {
     const presentQuery = getPresent(this.props.query);
     const dragAndDropFeedbacks = this.getDragAndDropFeedbacks();
     return (
-      <SplitCard
-        stackSections="horizontal"
+      <Card
         sections={
           <>
             <CardSection
@@ -565,16 +553,6 @@ class AggregateView extends React.Component<Props, LocalState> {
                   }))}
                 />
               </DragDropContext>
-            </CardSection>
-            <CardSection title="Top N Columns" disabled={this.isUiDisabled()}>
-              <JsonTextarea
-                value={presentQuery.columnsTopN}
-                onChange={newColumnsTopN => {
-                  this.props.changeAggregateColumnsTopN(newColumnsTopN);
-                }}
-                validate={topNDecoder}
-                placeholder={JSON.stringify(topNSample, null, 2)}
-              />
             </CardSection>
           </>
         }

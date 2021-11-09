@@ -59,12 +59,30 @@ schema SCHEMA_NAME(dataSource = "foodmart") {
   measure cost(column = "sales_fact.store_cost")
   measure unitSales(column = "sales_fact.unit_sales")
 
+  table region {
+    columns *
+  }
+
+  table product {
+    columns *
+  }
+
   table customer {
     column birthYear(expression = "extract(year from birthdate)")
+    columns *
   }
 
   table store {
     column region_id (tableRef = "region.region_id")
+    columns *
+  }
+
+  table time_by_day {
+    columns *
+  }
+
+  table warehouse_class {
+    columns *
   }
 
   table inventory(sql = """select * from "foodmart"."inventory_fact_1997" union all
@@ -97,5 +115,6 @@ schema SCHEMA_NAME(dataSource = "foodmart") {
 
   table warehouse {
     column warehouse_class_id(tableRef = "warehouse_class.warehouse_class_id")
+    columns *
   }
 }
